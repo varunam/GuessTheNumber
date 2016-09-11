@@ -2,18 +2,24 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.util.Random;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.TextField;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
+import javax.swing.JLabel;
 
 
 public class GuessTheNumber {
@@ -58,7 +64,7 @@ public class GuessTheNumber {
 		frmGuessTheNumber.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Varun\\Desktop\\images.png"));
 		frmGuessTheNumber.setForeground(Color.WHITE);
 		frmGuessTheNumber.setTitle("Guess the Number!");
-		frmGuessTheNumber.setBounds(100, 100, 450, 300);
+		frmGuessTheNumber.setBounds(100, 100, 606, 452);
 		frmGuessTheNumber.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmGuessTheNumber.getContentPane().setLayout(null);
 		
@@ -66,7 +72,7 @@ public class GuessTheNumber {
 		textField2.setBackground(SystemColor.window);
 		textField2.setEnabled(false);
 		textField2.setEditable(false);
-		textField2.setBounds(102, 144, 232, 22);
+		textField2.setBounds(318, 245, 232, 22);
 		frmGuessTheNumber.getContentPane().add(textField2);
 		
 		JButton btnGuess = new JButton("Guess");
@@ -79,17 +85,31 @@ public class GuessTheNumber {
 				try{
 					temp1 = Integer.parseInt(textInput.getText());
 					if (temp1>100){
-						JOptionPane.showMessageDialog(null, "I asked you to enter a number lesser than 100!");
+						/* using the below block of code to make pop ups happen on top rather than behind. old line of code is mentioned below */
+						final JDialog dialog = new JDialog();
+						dialog.setAlwaysOnTop(true);    
+						JOptionPane.showMessageDialog(dialog, "I asked you to enter a number lesser than 100!");
+						//JOptionPane.showMessageDialog(null, "I asked you to enter a number lesser than 100!"); (this pane will pop up behind main window.
+						
 					} else if (temp1 > temp2){
-							JOptionPane.showMessageDialog(null, "Answer is lesser than your choice!");
+						final JDialog dialog = new JDialog();
+						dialog.setAlwaysOnTop(true);    
+						JOptionPane.showMessageDialog(dialog, "Answer is lesser than your choice!");
+							//JOptionPane.showMessageDialog(null, "Answer is lesser than your choice!");
 							count++;
 						}
 						else if(temp1 < temp2){
-							JOptionPane.showMessageDialog(null, "Answer is greater than your choice!");
+							final JDialog dialog = new JDialog();
+							dialog.setAlwaysOnTop(true);    
+							JOptionPane.showMessageDialog(dialog, "Answer is greater than your choice!");
+							//JOptionPane.showMessageDialog(null, "Answer is greater than your choice!");
 							count++;
 								}
 							else if(temp1 == temp2){
-								JOptionPane.showMessageDialog(null, "Congratulations! \n You Guessed it right!");
+								final JDialog dialog = new JDialog();
+								dialog.setAlwaysOnTop(true);    
+								JOptionPane.showMessageDialog(dialog, "Congratulations! \n You Guessed it right!");
+								//JOptionPane.showMessageDialog(null, "Congratulations! \n You Guessed it right!");
 								count++;
 								answered=1;
 								frmGuessTheNumber.dispose();
@@ -98,21 +118,27 @@ public class GuessTheNumber {
 								JOptionPane.showMessageDialog(null, "GAME OVER!");
 								
 					
-					textField2.setText("Chances Left to Guess: " + (5-count));
+					textField2.setText(temp2 + "Chances Left to Guess: " + (5-count));
 					
 					if(count==5){
 						if(answered!=1){
-						JOptionPane.showMessageDialog(null, "Correct Answer: " + temp2 + "\n Good Bye!");
+							final JDialog dialog = new JDialog();
+							dialog.setAlwaysOnTop(true);    
+							JOptionPane.showMessageDialog(dialog, " GAME OVER! \n Correct Answer: " + temp2 + "\n Good Bye!");
+						//JOptionPane.showMessageDialog(null, "Correct Answer: " + temp2 + "\n Good Bye!");
 						frmGuessTheNumber.dispose();
 						}
 					}
 										
 				}catch (Exception e){
-					JOptionPane.showMessageDialog(null, "Enter a number to start the Game!");
+					final JDialog dialog = new JDialog();
+					dialog.setAlwaysOnTop(true);    
+					JOptionPane.showMessageDialog(dialog, "Enter a number to start the Game!");
+				//	JOptionPane.showMessageDialog(null, "Enter a number to start the Game!");
 				}
 			}
 		});
-		btnGuess.setBounds(156, 24, 118, 40);
+		btnGuess.setBounds(356, 102, 118, 40);
 		frmGuessTheNumber.getContentPane().add(btnGuess);
 		
 		textInput = new JTextField();
@@ -122,7 +148,7 @@ public class GuessTheNumber {
 				
 			}
 		});
-		textInput.setBounds(138, 75, 172, 20);
+		textInput.setBounds(334, 167, 172, 20);
 		frmGuessTheNumber.getContentPane().add(textInput);
 		textInput.setColumns(10);
 		
@@ -139,8 +165,8 @@ public class GuessTheNumber {
 		txtrEnterANumber.setLineWrap(true);
 		txtrEnterANumber.setEnabled(false);
 		txtrEnterANumber.setEditable(false);
-		txtrEnterANumber.setText("  (Enter a number within 100)");
-		txtrEnterANumber.setBounds(102, 95, 232, 22);
+		txtrEnterANumber.setText(" (Enter a number within 100)");
+		txtrEnterANumber.setBounds(307, 186, 232, 22);
 		frmGuessTheNumber.getContentPane().add(txtrEnterANumber);
 		
 		JButton btnNewButton = new JButton("How to Play?");
@@ -150,8 +176,14 @@ public class GuessTheNumber {
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 9));
-		btnNewButton.setBounds(318, 223, 106, 28);
+		btnNewButton.setBounds(474, 374, 106, 28);
 		frmGuessTheNumber.getContentPane().add(btnNewButton);
+		
+		JLabel label = new JLabel("");
+		Image Images = new ImageIcon(this.getClass().getResource("/Guess.png")).getImage();
+		label.setIcon(new ImageIcon(Images));
+		label.setBounds(18, 11, 256, 256);
+		frmGuessTheNumber.getContentPane().add(label);
 		
 		
 	}

@@ -172,7 +172,10 @@ public class GuessTheNumber {
 		JButton btnNewButton = new JButton("How to Play?");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "1. Enter a number within given limit in the text box given. \n2. If your number matches with system generated Random number, you will win the Game. \n3. If your number doesn't match, you will be notified whether your number is greater or lesser than System generated number. \n4. You are supposed to Guess The Number within given number of chances. \nNote: Make use of Clues if any. ");
+				final JDialog dialog = new JDialog();
+				dialog.setAlwaysOnTop(true);    
+				JOptionPane.showMessageDialog(dialog, "1. Enter a number within given limit in the text box given. \n2. If your number matches with system generated Random number, you will win the Game. \n3. If your number doesn't match, you will be notified whether your number is greater or lesser than System generated number. \n4. You are supposed to Guess The Number within given number of chances. \nNote: Make use of Clues if any. ");
+				//JOptionPane.showMessageDialog(null, "1. Enter a number within given limit in the text box given. \n2. If your number matches with system generated Random number, you will win the Game. \n3. If your number doesn't match, you will be notified whether your number is greater or lesser than System generated number. \n4. You are supposed to Guess The Number within given number of chances. \nNote: Make use of Clues if any. ");
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 9));

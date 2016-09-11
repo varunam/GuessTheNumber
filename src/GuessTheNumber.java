@@ -118,7 +118,7 @@ public class GuessTheNumber {
 								JOptionPane.showMessageDialog(null, "GAME OVER!");
 								
 					
-					textField2.setText(temp2 + "Chances Left to Guess: " + (5-count));
+					textField2.setText("Chances Left to Guess: " + (5-count));
 					
 					if(count==5){
 						if(answered!=1){

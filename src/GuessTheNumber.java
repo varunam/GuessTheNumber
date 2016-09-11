@@ -12,6 +12,8 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.TextField;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 
 public class GuessTheNumber {
@@ -61,9 +63,10 @@ public class GuessTheNumber {
 		frmGuessTheNumber.getContentPane().setLayout(null);
 		
 		TextField textField2 = new TextField();
+		textField2.setBackground(SystemColor.window);
 		textField2.setEnabled(false);
 		textField2.setEditable(false);
-		textField2.setBounds(113, 212, 232, 22);
+		textField2.setBounds(102, 144, 232, 22);
 		frmGuessTheNumber.getContentPane().add(textField2);
 		
 		JButton btnGuess = new JButton("Guess");
@@ -72,22 +75,28 @@ public class GuessTheNumber {
 		btnGuess.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int temp1,answered=0;
-				count++;				
+								
 				try{
 					temp1 = Integer.parseInt(textInput.getText());
-					if (temp1 > temp2){
+					if (temp1>100){
+						JOptionPane.showMessageDialog(null, "I asked you to enter a number lesser than 100!");
+					} else if (temp1 > temp2){
 							JOptionPane.showMessageDialog(null, "Answer is lesser than your choice!");
+							count++;
 						}
 						else if(temp1 < temp2){
 							JOptionPane.showMessageDialog(null, "Answer is greater than your choice!");
+							count++;
 								}
 							else if(temp1 == temp2){
 								JOptionPane.showMessageDialog(null, "Congratulations! \n You Guessed it right!");
+								count++;
 								answered=1;
 								frmGuessTheNumber.dispose();
 							}
 							else
 								JOptionPane.showMessageDialog(null, "GAME OVER!");
+								
 					
 					textField2.setText("Chances Left to Guess: " + (5-count));
 					
@@ -103,7 +112,7 @@ public class GuessTheNumber {
 				}
 			}
 		});
-		btnGuess.setBounds(158, 73, 118, 40);
+		btnGuess.setBounds(156, 24, 118, 40);
 		frmGuessTheNumber.getContentPane().add(btnGuess);
 		
 		textInput = new JTextField();
@@ -113,7 +122,7 @@ public class GuessTheNumber {
 				
 			}
 		});
-		textInput.setBounds(138, 136, 172, 20);
+		textInput.setBounds(138, 75, 172, 20);
 		frmGuessTheNumber.getContentPane().add(textInput);
 		textInput.setColumns(10);
 		
@@ -122,11 +131,27 @@ public class GuessTheNumber {
 		frmGuessTheNumber.getContentPane().add(textArea);
 		
 		JTextArea txtrEnterANumber = new JTextArea();
+		txtrEnterANumber.setFont(new Font("Monospaced", Font.BOLD, 13));
+		txtrEnterANumber.setForeground(SystemColor.activeCaptionText);
+		txtrEnterANumber.setWrapStyleWord(true);
+		txtrEnterANumber.setBackground(UIManager.getColor("CheckBox.light"));
+		txtrEnterANumber.setToolTipText("");
+		txtrEnterANumber.setLineWrap(true);
 		txtrEnterANumber.setEnabled(false);
 		txtrEnterANumber.setEditable(false);
-		txtrEnterANumber.setText("Enter a number within 100");
-		txtrEnterANumber.setBounds(113, 184, 232, 22);
+		txtrEnterANumber.setText("  (Enter a number within 100)");
+		txtrEnterANumber.setBounds(102, 95, 232, 22);
 		frmGuessTheNumber.getContentPane().add(txtrEnterANumber);
+		
+		JButton btnNewButton = new JButton("How to Play?");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "1. Enter a number within given limit in the text box given. \n2. If your number matches with system generated Random number, you will win the Game. \n3. If your number doesn't match, you will be notified whether your number is greater or lesser than System generated number. \n4. You are supposed to Guess The Number within given number of chances. \nNote: Make use of Clues if any. ");
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 9));
+		btnNewButton.setBounds(318, 223, 106, 28);
+		frmGuessTheNumber.getContentPane().add(btnNewButton);
 		
 		
 	}
